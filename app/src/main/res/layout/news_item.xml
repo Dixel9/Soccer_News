@@ -15,13 +15,13 @@
             android:id="@+id/ivThumbnail"
             android:layout_width="0dp"
             android:layout_height="@dimen/news_image_height"
+            android:contentDescription="@string/cd_news_image"
+            android:src="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@color/black"
-            tools:srcCompat="@tools:sample/avatars"
-            android:contentDescription="@string/cd_news_image" />
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tvTitle"
@@ -66,22 +66,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_margin"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/cd_favorite_icon"
+            android:focusable="true"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/btOpenLink"
             app:layout_constraintEnd_toStartOf="@+id/ivShare"
             app:layout_constraintTop_toTopOf="@+id/btOpenLink"
-            app:srcCompat="@drawable/ic_favorites"
-            android:contentDescription="@string/cd_favorite_icon" />
+            app:srcCompat="@drawable/ic_favorites" />
+            <!-- Referência: Incluir o efeito de Ripple (https://stackoverflow.com/a/61012286/3072570) -->
 
         <ImageView
             android:id="@+id/ivShare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/default_margin"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:contentDescription="@string/cd_share_icon"
+            android:focusable="true"
+            android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/ivFavorite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/ivFavorite"
-            app:srcCompat="@drawable/ic_share"
-            android:contentDescription="@string/cd_share_icon" />
+            app:srcCompat="@drawable/ic_share" />
+        <!-- Referência: Incluir o efeito de Ripple (https://stackoverflow.com/a/61012286/3072570) -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
