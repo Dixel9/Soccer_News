@@ -7,25 +7,48 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.dio.soccernews.data.remote.SoccerNewsApi;
 import me.dio.soccernews.domain.News;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewsViewModel extends ViewModel {
 
-    private final MutableLiveData<List<News>> mNews;
+    private final MutableLiveData<List<News>> news = new MutableLiveData<>();
+    private final SoccerNewsApi api;
 
     public NewsViewModel() {
-        mNews = new MutableLiveData<>();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://dixel9.github.io/Soccer_news_Api/news.json")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        //TODO Remover mock de Notícias
-        List<News> news = new ArrayList<>();
-        news.add(new News("Ferroviária Tem Desfalque Importante", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."));
-        news.add(new News("Ferrinha Joga no Sábado", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."));
-        news.add(new News("Copa do Mundo Feminina Está Terminando", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."));
+        api = retrofit.create(SoccerNewsApi.class);
+        this.findNews();
+    }
 
-        mNews.setValue(news);
+    public void findNews() {
+        api.getNews().enqueue(new Callback<List<News>>() {
+            @Override
+            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+                if (response.isSuccessful()) {
+                    news.setValue(response.body());
+                } else {
+                    //TODO Pensar em uma estratégia de tratamento de erros.
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<News>> call, Throwable t) {
+                //TODO Pensar em uma estratégia de tratamento de erros.
+            }
+        });
     }
 
     public LiveData<List<News>> getNews() {
-        return mNews;
+        return this.news;
     }
 }
