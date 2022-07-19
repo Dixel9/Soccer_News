@@ -22,7 +22,7 @@ public class NewsViewModel extends ViewModel {
 
     public NewsViewModel() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://dixel9.github.io/Soccer_news_Api/news.json")
+                .baseUrl("https://dixel9.github.io/Soccer_news_Api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
