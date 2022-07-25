@@ -23,7 +23,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     private final FavoriteListener favoriteListener;
 
     public NewsAdapter(List<News> news, FavoriteListener favoriteListener) {
-        this.news =news;
+        this.news = news;
         this.favoriteListener = favoriteListener;
     }
 
