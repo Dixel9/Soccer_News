@@ -30,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        this.setupDb();
+        setupDb();
     }
 
     private void setupDb() {
-        db = Room.databaseBuilder(this, AppDatabase.class, "soccer-news")
+        db = Room.databaseBuilder(this, AppDatabase.class,"soccer-news")
                 .allowMainThreadQueries()
                 .build();
     }

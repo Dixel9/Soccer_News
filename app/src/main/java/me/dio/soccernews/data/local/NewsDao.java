@@ -17,4 +17,5 @@ public interface NewsDao {
 
     @Query("SELECT * FROM news WHERE favorite = 1")
     List<News> loadFavoriteNews();
+
 }
